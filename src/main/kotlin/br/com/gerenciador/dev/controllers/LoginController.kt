@@ -15,6 +15,7 @@ class LoginController {
     @PostMapping
     fun efetuarLogin(@RequestBody dto : LoginDTO): ResponseEntity<Any>{
         try {
+
             throw RuntimeException("Testando uma Excessão")
         }catch (e: Exception){
             return ResponseEntity(ErroDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Não foi possivel efetuar o login"),
