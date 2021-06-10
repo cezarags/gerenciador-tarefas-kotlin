@@ -3,6 +3,8 @@ package br.com.gerenciador.dev.controllers
 import br.com.gerenciador.dev.dtos.ErroDTO
 import br.com.gerenciador.dev.dtos.LoginRequestDTO
 import br.com.gerenciador.dev.dtos.LoginResponseDTO
+import br.com.gerenciador.dev.utils.JWTUtils
+import io.jsonwebtoken.Jwts
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -27,7 +29,10 @@ class LoginController {
                 )
             }
             //throw RuntimeException("Testando uma Excessão")
-            val usuarioTeste = LoginResponseDTO("Usuario Teste", LOGIN_MOCK,)
+            val idUsuario = 1
+            val token = JWTUtils().gerarToken(idUsuario.toString())
+
+            val usuarioTeste = LoginResponseDTO("Usuario Teste", LOGIN_MOCK, token)
             return ResponseEntity(usuarioTeste, HttpStatus.OK)
         } catch (e: Exception) {
             return ResponseEntity(
